@@ -16,6 +16,12 @@ Reference docs:
 - Live payment acceptance from a second app.
 - Merchant reconciliation from Tempo chain logs without page refresh.
 
+## Live screenshot
+
+Merchant checkout UI with paid invoices:
+
+![Tempo merchant checkout live demo](docs/merchant-live.png)
+
 ## Architecture
 
 ```text
