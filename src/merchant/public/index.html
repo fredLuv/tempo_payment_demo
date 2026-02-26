@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Tempo Merchant Checkout</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #f4efe4;
+        --bg-strong: #f0dfbe;
+        --ink: #1d160d;
+        --accent: #0f9b6d;
+        --accent-weak: #d7f0e8;
+        --danger: #b63a2d;
+        --panel: #fffaf1;
+        --line: #d5c7aa;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: 'Space Grotesk', sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 100% 0%, #ffe5b2 0 18%, transparent 19%),
+          radial-gradient(circle at 0% 100%, #b3ebd9 0 16%, transparent 17%),
+          linear-gradient(160deg, var(--bg) 0%, var(--bg-strong) 100%);
+        min-height: 100vh;
+      }
+      .wrap {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 28px 16px 48px;
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: clamp(1.7rem, 4vw, 2.5rem);
+      }
+      .sub {
+        margin: 0 0 20px;
+        opacity: 0.8;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 340px 1fr;
+        gap: 16px;
+      }
+      @media (max-width: 880px) {
+        .grid { grid-template-columns: 1fr; }
+      }
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 16px;
+        box-shadow: 0 12px 24px rgba(29, 22, 13, 0.08);
+      }
+      label {
+        font-weight: 600;
+        display: block;
+        margin-bottom: 6px;
+      }
+      input {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 12px;
+        font: inherit;
+      }
+      button {
+        width: 100%;
+        border: 0;
+        border-radius: 12px;
+        padding: 12px;
+        cursor: pointer;
+        font: inherit;
+        font-weight: 700;
+        background: var(--accent);
+        color: white;
+      }
+      .meta {
+        margin-top: 10px;
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 12px;
+        line-height: 1.5;
+      }
+      .list {
+        display: grid;
+        gap: 10px;
+      }
+      .invoice {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: white;
+        padding: 12px;
+      }
+      .invoice-top {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+      .id {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 12px;
+      }
+      .status {
+        border-radius: 999px;
+        padding: 4px 10px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+      .pending { background: #fdf1d2; color: #6f4c01; }
+      .paid { background: var(--accent-weak); color: #02573a; }
+      .row {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .muted { opacity: 0.72; }
+      a { color: #145dbf; }
+      .empty {
+        padding: 16px;
+        border: 1px dashed var(--line);
+        border-radius: 10px;
+        text-align: center;
+        opacity: 0.75;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <h1>Tempo Merchant Checkout</h1>
+      <p class="sub">Create invoice -> consumer terminal auto-accepts -> page updates when payment lands.</p>
+
+      <section class="grid">
+        <article class="card">
+          <h2>Create Invoice</h2>
+          <label for="amount">Amount (stablecoin)</label>
+          <input id="amount" type="number" min="0" step="0.01" value="1" />
+
+          <label for="note">Note (optional)</label>
+          <input id="note" type="text" placeholder="Latte + muffin" />
+
+          <button id="createBtn" type="button">Generate Checkout Invoice</button>
+
+          <div class="meta" id="config"></div>
+        </article>
+
+        <article class="card">
+          <h2>Invoice Feed</h2>
+          <div id="invoices" class="list"></div>
+        </article>
+      </section>
+    </main>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

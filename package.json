@@ -1,0 +1,22 @@
+{
+  "name": "tempo-realtime-checkout-demo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Merchant checkout + consumer terminal real-time payment demo on Tempo testnet",
+  "scripts": {
+    "merchant": "node src/merchant/server.js",
+    "consumer": "node src/consumer/terminal.js",
+    "start": "concurrently -k -n merchant,consumer -c cyan,green \"npm run merchant\" \"npm run consumer\""
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "concurrently": "^9.2.1",
+    "dotenv": "^16.6.1",
+    "express": "^5.1.0",
+    "viem": "^2.38.5",
+    "ws": "^8.18.3"
+  }
+}
